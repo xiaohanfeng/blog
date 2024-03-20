@@ -1,0 +1,94 @@
+.meihua_1 {
+	display: block;
+	margin-top: 10px;
+	padding: 5px 10px;
+	background-color: #f6491e;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 18px;
+	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.meihua_2 {
+	background-color: #fff;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 2px rgba(15,39,65,0.1);
+	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.meihua_2 .meihua_2_1 {
+	height: auto;
+	overflow: hidden;
+	background-color: #FFF;
+	border: 1px solid #DDDDDD;
+	border-width: 1px 1px 1px 1px;
+	padding: 20px;
+}
+.meihua_2 .meihua_2_1 p {
+	margin: 5px auto!important;
+}
+.meihua_2 .meihua_2_1 .meihua_btn {
+float: left;
+    border: 1px solid #8a8a8a;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 40px;
+    margin: 10px 10px 0 0;
+    overflow: hidden;
+    border-radius: 2px;
+	background: url(../images/30.png) no-repeat 5px 3px #6bc30d;
+    border: 1px solid #6bc30d;
+    color: #FFF;
+    text-decoration: none;    padding-right: 10px;
+}
+.meihua_2 .meihua_2_1 .meihua_btn i {
+	margin-right: 5px
+}
+.meihua_2 .meihua_2_1 .meihua_btn:hover {
+	background-color: #3169b0
+}
+.video {
+position: relative;
+padding-bottom: 56.25%;
+height: 0;
+overflow: hidden;
+}
+.video iframe,
+.video object,
+.video embed {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.short-btn {
+    float: left;
+    border: 1px solid #8a8a8a;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 40px;
+    margin: 10px 10px 0 0;
+    overflow: hidden;
+    border-radius: 2px;
+    background: url(../images/10.png) no-repeat 5px 3px #6bc30d;
+    border: 1px solid #6bc30d;
+    text-decoration: none;color: #FFF!important;padding-right: 10px;text-decoration: none; 
+}
+.short-btn:hover {
+	background-color: #3169b0
+}
+@media screen and (max-width:980px) {
+.page404 {
+	padding: 0 0 0
+}
+.serach404 form {
+	width: 80%
+}
+.serach404 form input {
+	width: 75%
+}
+.serach404 form button {
+	width: 25%
+}
+}

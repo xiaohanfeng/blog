@@ -1,0 +1,48 @@
+{
+    "name": "topthink/think",
+    "description": "the new thinkphp framework",
+    "type": "project",
+    "keywords": [
+        "framework",
+        "thinkphp",
+        "ORM"
+    ],
+    "homepage": "http://www.wekenw.com/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "wucs",
+            "email": "wuchengshi11@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "topthink/framework": "^6.0.0",
+        "topthink/think-orm": "^2.0",
+        "topthink/think-multi-app": "^1.0",
+        "topthink/think-view": "^1.0",
+        "elasticsearch/elasticsearch": "~7.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.2",
+        "topthink/think-trace":"^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        },
+        "psr-0": {
+            "": "extend/"
+        }
+    },
+    "config": {
+        "platform-check": false,
+        "preferred-install": "dist"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php think service:discover",
+            "@php think vendor:publish"
+        ]
+    }
+}

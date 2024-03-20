@@ -1,0 +1,101 @@
+<fieldset class="layui-elem-field">
+    <legend>账号设置</legend>
+    <div class="layui-field-box">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="150">
+                <col width="150">
+                <col width="100">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td>密&nbsp;&nbsp;&nbsp;码</td>
+                <td></td>
+                <td>存在风险，请设置密码</td>
+                <td><a class="linkblue" id="setpwd" href="javascript:;">设置密码</a></td>
+            </tr>
+            <tr>
+                <td>手&nbsp;&nbsp;&nbsp;机</td>
+                <td></td>
+                <td>13021166443</td>
+                <td><a class="linkblue" id="setmobile" href="javascript:;">修改手机</a></td>
+            </tr>
+            <tr>
+                <td>邮&nbsp;&nbsp;&nbsp;箱</td>
+                <td></td>
+                <td>存在风险，请绑定邮箱</td>
+                <td><a class="linkblue" id="setemail" href="javascript:;">绑定邮箱</a></td>
+            </tr>
+            <tr>
+                <td>三&nbsp;方&nbsp;账&nbsp;号</td>
+                <td></td>
+                <td>QQ 微信</td>
+                <td><a class="linkblue" href="javascript:;">立即设置</a></td>
+            </tr>
+            <tr>
+                <td>登&nbsp;录&nbsp;记&nbsp;录</td>
+                <td></td>
+                <td></td>
+                <td><a class="linkblue" href="javascript:;">查看记录</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+
+<fieldset class="layui-elem-field" style="margin-top:50px;">
+    <legend>隐私设置</legend>
+    <div class="layui-field-box">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">工作信息</label>
+                <div class="layui-input-inline" style="width: 70px;">
+                    <input type="checkbox" name="work" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                </div>
+                <div class="layui-form-mid layui-word-aux">开启后在个人主页等模块向他人展示工作信息</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">教育信息</label>
+
+                <div class="layui-input-inline" style="width: 70px;">
+                    <input type="checkbox" name="edu" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                </div>
+                <div class="layui-form-mid layui-word-aux">开启后在个人主页等模块向他人展示教育信息</div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+
+
+
+<style>
+    .linkblue{color:blue;}
+</style>
+
+<script>
+
+    layui.use(['form', 'laydate', 'layer'], function() {
+        var form = layui.form
+            , $ = layui.$
+            , layer = layui.layer;
+
+        $("#setpwd").click(function(){
+            layer.open({
+                type: 2 //此处以iframe
+                , id: 'layerAdd' //防止重复弹出
+                , shadeClose: true
+                , shade: 0.4
+                , scrollbar: false
+                , title: '设置'
+                , area: ['500px', '300px']
+                , maxmin: true
+                , content: '/admin/member/setpwd'
+            });
+        })
+
+    })
+</script>

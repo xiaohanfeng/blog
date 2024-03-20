@@ -1,0 +1,67 @@
+{extend name='index/base'}
+{block name="main-content"}
+<link href="__STATIC__/index/css/page.css" rel="stylesheet"> <!--分页样式-->
+<div class="row">
+    <div class="main fl">
+        <div class="side-hot auto-side">
+            <div class="home-main auto-main">
+                <!--页面主体信息-->
+                {volist name="article_list" id="art"}
+                <article class="post-list blockimg picsrcd auto-list wow fadeInDown" id="list{i}">
+                    <div class="entry-container">
+                        <div class="block-image feaimg">
+                            <a class="block-fea" href="{:url('detail/')}{$art.id}" title="{$art.title}">
+                                <img class="lazy" src="{$art.pic}" alt="{$art.title}" title="{$art.title}">
+                            </a>
+                            <div class="item-slant reverse-slant bg-orange"></div>
+                            <div class="item-slant"></div>
+                        </div>
+                        <header class="entry-header">
+                            <h2 class="entry-title">
+                                <a href="{:url('detail/')}{$art.id}">
+                                    {if $art.pv > 100}
+                                    <span class="badge arc_v4">热文</span>
+                                    {/if}
+                                    {$art.title}
+                                </a>
+                            </h2>
+                        </header>
+                        <div class="entry-summary ss">
+                            <p>
+                                {$art.excerpt}...</p>
+                        </div>
+                        <div class="entry-meta fea-meta">
+                            {$art.name} <span class="separator">/</span>
+                            <time datetime="2020-09-12">{$art.created_time} <span class="separator">/</span></time>
+                            <a class="meta-viewnums" href="javascript;">0 评论
+                                <span class="separator">/</span></a>
+                            <span class="meta-viewnums">{$art.pv} 阅读</span>
+                        </div>
+                    </div>
+                </article>
+                {/volist}
+                <!--分页-->
+                {$page|raw}
+            </div>
+        </div>
+    </div>
+    <!--博主介绍-->
+    {include file="index/side" /}
+</div>
+
+<div class="link-box box-shadow wow fadeInDown">
+    <!--友情链接-->
+    <section class="links-title">
+        <h3>友情链接</h3>
+        <span class="suburl">
+                      <a href="/" target="_blank">更多
+                        <i class="icon font-add-circle"></i></a>
+                    </span>
+    </section>
+    <ul id="links-home">
+        {volist name=":get_links(10)" id="link"}
+        <li><a href="{$link.href}" target="_blank" title="{$link.title}">{$link.title}</a></li>
+        {/volist}
+    </ul>
+</div>
+{/block}

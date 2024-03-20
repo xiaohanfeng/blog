@@ -1,0 +1,147 @@
+<div class="layui-inline">
+    <input class="layui-input" name="id" id="search" placeholder="名称" autocomplete="off">
+</div>
+<button class="layui-btn" data-type="reload" onclick="reload();">搜索</button>
+<table class="layui-hide" id="datalist" lay-filter="datalist"></table>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="delData">删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+    var url="{$current_url}";
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#datalist'
+            ,id: 'datalist'
+            ,url:url
+            ,toolbar: '#toolbar' //开启头部工具栏，并为其绑定左侧模板
+            ,title: '文章数据表'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left'}
+                ,{field:'id', title:'ID',  fixed: 'left', width:80, unresize: true, sort: true}
+                ,{field:'title', title:'名称',edit: 'text'}
+                ,{field:'excerpt', title:'简介'}
+                ,{field:'created_time', title:'创建时间', sort: true, templet: function(res){
+                        return layui.util.toDateString(res.created_time, 'yyyy-MM-dd HH:mm:ss');
+                    }}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
+            ]]
+            , limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+            ,page: true
+        });
+
+        //监听单元格编辑
+        table.on('edit(datalist)', function(obj){
+            var value = obj.value //得到修改后的值
+                ,data = obj.data //得到所在行所有键值
+                ,field = obj.field; //得到字段
+
+            var container = {};
+            container [field]=value;
+            container['id']=data.id;
+            $.ajax({
+                url:'/admin/deal/edit?table=article',
+                dataType:'json',
+                type:'POST',
+                data:container,
+                success:function(data){
+                    if(data.code === 1){
+                        layer.msg('success');
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            })
+        });
+
+        //头工具栏事件
+        table.on('toolbar(datalist)', function(obj){
+           // console.log(obj);
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'delData':
+                    var data = checkStatus.data;
+                    var arr = [];
+                    for (var i = 0; i < data.length; i++) { //循环筛选出id
+                        arr.push(data[i].id);
+                    }
+                    //console.log(arr);
+                    layer.confirm('真的删除么', function(index){
+                        $.ajax({
+                            url:'/admin/content/del',
+                            dataType:'json',
+                            type:'POST',
+                            data:{'ids':arr.join(',')},
+                            success:function(data){
+                                if(data.code === 1){
+                                    layer.msg('success');
+                                    reload();
+                                }else{
+                                    layer.msg(data.msg);
+                                }
+                            }
+                        })
+
+                        layer.close(index);
+                    });
+                    break;
+                case 'add':
+                    window.open('/admin/content/post');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(datalist)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('真的删除么', function(index){
+                    $.ajax({
+                        url:'/admin/content/del',
+                        dataType:'json',
+                        type:'POST',
+                        data:{'ids':data.id},
+                        success:function(data){
+                            if(data.code === 1){
+                                layer.msg('success');
+                                obj.del();
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    })
+
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                window.open('/admin/content/post?artid='+data.id);
+            }
+        });
+        window.reload = function() {
+            var search = $('#search');
+            //执行重载
+            table.reload('datalist', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                ,where: {
+                    key: {
+                        title: search.val()
+                    }
+                }
+            });
+        }
+
+    });
+</script>

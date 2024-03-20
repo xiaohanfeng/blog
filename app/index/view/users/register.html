@@ -1,0 +1,56 @@
+{extend name='users/base'}
+{block name="login_register"}
+<div class="login_form">
+    <div class="login_title">
+        注册
+    </div>
+
+    <form action="" method="post" id="doregister">
+        <input type="hidden" name="__token__" value="{:token()}"/>
+        <input type="hidden" name="dosubmit" value="1"/>
+        <div class="form_text_ipt">
+            <input name="username" type="text" placeholder="手机号/邮箱">
+        </div>
+        <div class="ececk_warning"><span>数据不能为空</span></div>
+        <div class="form_text_ipt">
+            <input name="password" type="password" placeholder="密码">
+        </div>
+        <div class="ececk_warning"><span>数据不能为空</span></div>
+        <div class="form_text_ipt">
+            <input name="repassword" type="password" placeholder="重复密码">
+        </div>
+        <div class="ececk_warning"><span>数据不能为空</span></div>
+<!--        <div class="form_text_ipt">-->
+<!--            <input name="code" type="text" placeholder="验证码">-->
+<!--        </div>-->
+<!--        <div class="ececk_warning"><span>数据不能为空</span></div>-->
+
+        <div class="form_btn">
+            <button type="button" onclick="checkForm();">注册</button>
+        </div>
+        <div class="form_reg_btn">
+            <span>已有帐号？</span><a href="{:url('login/')}">马上登录</a>
+        </div>
+    </form>
+    <div class="other_login">
+        <div class="left other_left">
+            <span>其它登录方式</span>
+        </div>
+        <div class="right other_right">
+            <a href="#">QQ登录</a>
+            <a href="#">微信登录</a>
+        </div>
+    </div>
+</div>
+<script>
+	function checkForm(){
+	    var password = $("input[name='password']").val();
+	    var repassword = $("input[name='repassword']").val();
+	    if(password != repassword){
+	        alert('两次密码输入不一致');
+	        return false;
+        }
+	    $('#doregister').submit();
+    }
+</script>
+{/block}

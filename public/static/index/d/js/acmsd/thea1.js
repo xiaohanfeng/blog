@@ -1,0 +1,1 @@
+document.write("	<div class=\"left-ad\">            <div style=\"display: block;background-color: #fff;border: 2px dashed #bbb;text-align: center;color: #aaa;line-height:60px;font-size: 15px;\">              <div style=\"text-align: center;line-height:80px;\">首页广告位一，可在后台>插件>广告系统中修改！</div>            </div>          </div>")

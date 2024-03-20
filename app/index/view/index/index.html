@@ -1,0 +1,184 @@
+{extend name='index/base'}
+{block name="main-content"}
+<link href="__STATIC__/index/css/page.css" rel="stylesheet"> <!--分页样式-->
+<div class="row">
+    <div class="main fl">
+
+        <!--首页轮播 start-->
+        <!--                <div class="wrapper-ban">-->
+        <!--                    <div class="swiper-container swiper-main">-->
+        <!--                        <div class="swiper-wrapper">-->
+        <!--                            {assign name="list" value="$cc = array(1,2,3)" /}-->
+        <!--                            {foreach $list as $key=>$vo }-->
+        <!--                                <div class="swiper-slide">-->
+        <!--                                    <a href="https://www.nx10.cn/" target="_blank">-->
+        <!--                                        <img src="__STATIC__/index/images/banner1.jpg" alt="首页轮播文字">-->
+        <!--                                        <span class="swiper-title">首页轮播文字{i}</span></a>-->
+        <!--                                </div>-->
+        <!--                            {/foreach}-->
+        <!--                        </div>-->
+        <!--                        &lt;!&ndash; Add Pagination &ndash;&gt;-->
+        <!--                        <div class="swiper-pagination"></div>-->
+        <!--                        <div class="swiper-button-next"></div>-->
+        <!--                        <div class="swiper-button-prev"></div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--首页轮播 end-->
+
+        <!--                <div class="top_list">-->
+        <!--                    {volist name="hot_list" id="art" offset="0" length='4'}-->
+        <!--                        <div class="col-small">-->
+        <!--                            <div class="col-pic">-->
+        <!--                                <a href="" title="{$art.title}">-->
+        <!--                                    <img src="__STATIC__/index/d/file/p/2020/02-13/9046549fd43b04a946ce1fff5974adcd.jpg"-->
+        <!--                                         width="100" height="75" alt="{$art.title}"></a>-->
+        <!--                            </div>-->
+        <!--                            <div class="col-info">-->
+        <!--                                <h3>-->
+        <!--                                    <a href="{:url('detail/')}{$art.id}" title="{$art.title}" class="col-title">{$art.title}</a></h3>-->
+        <!--                                <p class="col-desc">{$art.excerpt}</p>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    {/volist}-->
+
+        <!--                    <ul class="col-large">-->
+        <!--                        {volist name="hot_list" id="art" offset="4" length='6'}-->
+        <!--                            <li>-->
+        <!--                                <em class="color-{$i}">{$i}</em>-->
+        <!--                                <span class="list-date">2020-02-08</span>-->
+        <!--                                <a href="{:url('detail/')}{$art.id}" title="{$art.title}">{$art.title}</a>-->
+        <!--                            </li>-->
+        <!--                        {/volist}-->
+        <!--                    </ul>-->
+        <!--                </div>-->
+
+        <div class="side-hot auto-side">
+            <div class="home-main auto-main">
+                <!--页面主体信息-->
+                {volist name="article_list" id="art"}
+                <article class="post-list blockimg picsrcd auto-list wow fadeInDown" id="list{i}">
+                    <div class="entry-container">
+                        <div class="block-image feaimg">
+                            <a class="block-fea" href="{:url('detail/')}{$art.id}" title="{$art.title}">
+                                <img class="lazy" src="{$art.pic}" alt="{$art.title}" title="{$art.title}">
+                            </a>
+                            <div class="item-slant reverse-slant bg-orange"></div>
+                            <div class="item-slant"></div>
+                        </div>
+                        <header class="entry-header">
+                            <h2 class="entry-title">
+                                <a href="{:url('detail/')}{$art.id}">
+                                    {if $art.pv > 100}
+                                    <span class="badge arc_v4">热文</span>
+                                    {/if}
+                                    {$art.title}
+                                </a>
+                            </h2>
+                        </header>
+                        <div class="entry-summary ss">
+                            <p>
+                                {$art.excerpt}</p>
+                        </div>
+                        <div class="entry-meta fea-meta">
+                            <a>原创 <span class="separator">/</span></a>
+                            <a class="meta-cate" href="javascript:;">{$art.name} <span class="separator">/</span></a>
+                            <time datetime="2020-09-12">{$art.created_time|date='Y-m-d'} <span
+                                    class="separator">/</span></time>
+                            <a class="meta-viewnums" href="javascript:;">0 评论
+                                <span class="separator">/</span></a>
+                            <span class="meta-viewnums">{$art.pv} 阅读</span></div>
+                    </div>
+                </article>
+                {/volist}
+                <!--分页-->
+                {$page|raw}
+            </div>
+        </div>
+    </div>
+    <!--博主介绍-->
+    {include file="index/side" /}
+</div>
+
+<!--        <div id="primary" class="side-primary wow fadeInDown" data-wow-delay="0.25s">-->
+<!--            <div class="side-title-wrap">-->
+<!--                <h3 class="widget-title">互联资讯</h3>-->
+<!--                <span>自定义此处文字内容</span></div>-->
+<!--            <div class="side-box">-->
+<!--                <ul class="side-main">-->
+<!--                    {assign name="list" value="$cc = array(1,2,3,4,5,6)" /}-->
+<!--                    {foreach $list as $key=>$vo }-->
+<!--                    <li class="side-list side-list-box">-->
+<!--                        <a href="/zixun/153.html" title="国外机构测得iPhone 11 Pro辐射量超标137%" class="block">-->
+<!--                            <img src="__STATIC__/index/images/grey.gif" alt="国外机构测得iPhone 11 Pro辐射量超标137%" width="130"-->
+<!--                                 height="98"-->
+<!--                                 style="background: url(__STATIC__/index/d/file/p/2020/02-13/1bed23fb41166bdec133a4ea723068b9.jpg) center center / cover no-repeat;"></a>-->
+<!--                        <div class=" side-h3-title">-->
+<!--                            <h3>-->
+<!--                                <a href="/zixun/153.html" title="国外机构测得iPhone 11 Pro辐射量超标137%">国外机构测得iPhone 11-->
+<!--                                    Pro辐射量超标137%</a></h3>-->
+<!--                            <small>2020-02-08</small>-->
+<!--                        </div>-->
+<!--                        <p>-->
+<!--                            <a href="/zixun/153.html" title="国外机构测得iPhone 11 Pro辐射量超标137%">　　国外机构测得iPhone 11-->
+<!--                                Pro辐射量超标137%　　无论是三方出货数据还是苹果财报(截至去年12月28日)，都证明iPhone 11系列的市场热情不低，仍颇受消费者欢迎。　　...</a></p>-->
+<!--                    </li>-->
+<!--                    {/foreach}-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<div class="line-big">
+    {foreach $series as $sek=>$sev }
+    <div class="line-box wow fadeInDown">
+        <h3 class="cat-title bkx">
+            <span class="badge arc_v6">系列文章</span>
+            <a href="{:url('index/series/')}{$sev.id}">{$sev.name}
+                <span class="more-i">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </span>
+            </a>
+        </h3>
+        {assign name="list" value="$temp = get_series_articles($sev.id)" /}
+        <div class="cat-site">
+            {volist name="list" id="vo" offset="0" length='1'}
+            <figure class="small-thumbnail">
+                <a class="sc" href="{:url('detail/')}{$list[0]['id']}">
+                    <img src="{$list[0]['pic']}" alt="{$list[0]['title']}">
+                </a>
+            </figure>
+            <h2 class="entry-small-title"><a href="{:url('detail/')}{$list[0]['id']}"
+                                             rel="bookmark">{$list[0]['title']}</a></h2>
+            {/volist}
+            <ul class="cat-list">
+                {volist name="list" id="vo" offset="1" length='4' empty="暂时没有数据"}
+                <li>
+<!--                    <span class="list-date">{$vo.created_time|date='Y-m-d'}</span>-->
+                    <a href="{:url('detail/')}{$vo.id}" rel="bookmark">{$vo.title}</a>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+
+    {/foreach}
+</div>
+
+<div class="link-box box-shadow wow fadeInDown">
+    <!--友情链接-->
+    <section class="links-title">
+        <h3>友情链接</h3>
+        <span class="suburl">
+                      <a href="javascript:;" target="_blank">更多
+                        <i class="icon font-add-circle"></i>
+                      </a>
+                    </span>
+    </section>
+    <ul id="links-home">
+        {volist name=":get_links(20)" id="link"}
+        <li><a href="{$link.href}" target="_blank" title="{$link.title}">{$link.title}</a></li>
+        {/volist}
+    </ul>
+</div>
+{/block}

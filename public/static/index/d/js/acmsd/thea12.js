@@ -1,0 +1,1 @@
+document.write("	<div class=\"left-ad\">            <div style=\"display: block;background-color: #fff;border: 2px dashed #bbb;text-align: center;color: #aaa;line-height:100px;font-size: 15px;/*width:730px;*//*margin-left:15px;*/\">              <div style=\"text-align: center;line-height:250px;\">内容页右侧广告位三-250PX*250PX</div>            </div>          </div> ")

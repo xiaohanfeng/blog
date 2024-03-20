@@ -1,0 +1,273 @@
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">基本信息</li>
+        <li>教育信息</li>
+        <li>工作信息</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用户昵称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">姓名:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" value="wucs" class="layui-input" disabled="" style="border:unset;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="birthday" id="birthday" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">开始工作</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="start_work" id="startWork" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="男" title="男" checked="">
+                        <input type="radio" name="sex" value="女" title="女">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所在地区</label>
+                    <div class="layui-input-inline">
+                        <select name="province" lay-filter="province">
+                            <option value="">请选择省</option>
+                            {volist name='provinces' id='pr'}
+                            <option value="{$pr.province}" {eq name="$province" value="$pr.province"}selected{/eq} title="{$pr.provinceid}">{$pr.province}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="city" lay-filter="city" id='city'>
+                            <option value="">请选择市</option>
+                            {volist name='cities' id='ci'}
+                            <option value="{$ci.city}" {eq name="$city" value="$ci.city"}selected{/eq} title="{$ci.cityid}">{$ci.city}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="layui-input-inline">
+                        <select name="area" lay-filter="area" id='area'>
+                            <option value="">请选择县/区</option>
+                            {volist name='areas' id='ar'}
+                            <option value="{$ar.area}" {eq name="$area" value="$ar.area"}selected{/eq}>{$ar.area}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">个人简介</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="你很懒，还没有添加简介" name="intro" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn layui-btn-primary layui-border-green" lay-submit="" lay-filter="form1">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-tab-item">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">学校名称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">专业:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">入学时间</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="admission_time" id="admission_time" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="admission_time1" id="admission_time1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">学历:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn layui-btn-primary layui-border-blue" lay-submit="" lay-filter="form2">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-tab-item">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">公司名称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">职位名称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">所属行业:</label>
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao">
+                                <option value=""></option>
+                                <option value="0">金融</option>
+                                <option value="1" selected="">教育</option>
+                                <option value="2">电商</option>
+                                <option value="3">传媒</option>
+                                <option value="4">健康医疗</option>
+                                <option value="4">游戏</option>
+                                <option value="4">娱乐</option>
+                                <option value="4">社交</option>
+                                <option value="4">电子</option>
+                                <option value="4">媒体</option>
+                                <option value="4">零售</option>
+                                <option value="4">交通物流</option>
+                                <option value="4">制造</option>
+                                <option value="4">能源</option>
+                                <option value="4">旅游</option>
+                                <option value="4">政务</option>
+                                <option value="4">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn layui-btn-primary layui-border-orange" lay-submit="" lay-filter="form3">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .layui-border-green {
+        border-color: #009688!important;
+        color: #009688!important;
+    }
+    .layui-border-orange {
+        border-color: #FFB800!important;
+        color: #FFB800!important;
+    }
+    .layui-border-blue {
+        border-color: #1E9FFF!important;
+        color: #1E9FFF!important;
+    }
+</style>
+
+<script>
+
+    layui.use(['form', 'laydate', 'layer', 'laydate'], function() {
+        var form = layui.form
+            , laydate = layui.laydate
+            , $ = layui.$
+            , layer = layui.layer;
+
+        //日期
+        laydate.render({
+            elem: '#birthday'
+        });
+        laydate.render({
+            elem: '#startWork'
+        });
+        laydate.render({
+            elem: '#admission_time'
+        });
+        laydate.render({
+            elem: '#admission_time1'
+        });
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        form.on('select(province)', function (data) {
+            console.log('123');
+            var provinceid = data.elem[data.elem.selectedIndex].title;
+            $.ajax({
+                type: 'POST',
+                url: "{:url('admin/member/getcity')}",
+                data: {'provinceid': provinceid},
+                dataType: 'json',
+                success: function (data) {
+                    $("#city").empty();
+                    $("#city").append("<option value=''>市</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $("#city").append("<option value='" + data[i].city + "' title='" + data[i].cityid + "'>" + data[i].city + "</option>");
+                    }
+                    form.render('select');
+                }
+            });
+        })
+        form.on('select(city)', function (data) {
+            var cityid = data.elem[data.elem.selectedIndex].title;
+            $.ajax({
+                type: 'POST',
+                url: "{:url('admin/member/getarea')}",
+                data: {'cityid': cityid},
+                dataType: 'json',
+                success: function (data) {
+                    $("#area").empty();
+                    $("#area").append("<option value=''>区/县</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $("#area").append("<option value='" + data[i].area + "'>" + data[i].area + "</option>");
+                    }
+                    form.render('select');
+                }
+            });
+        })
+
+        //监听提交
+        form.on('submit(form1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+    })
+</script>

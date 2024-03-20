@@ -1,0 +1,185 @@
+<?php /*a:3:{s:54:"E:\WWW\phpPro\phpblog\app\admin\view\content\post.html";i:1624264609;s:48:"E:\WWW\phpPro\phpblog\app\admin\view\header.html";i:1622626569;s:48:"E:\WWW\phpPro\phpblog\app\admin\view\footer.html";i:1622276682;}*/ ?>
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>  - wekenw</title>
+    <link rel="stylesheet" href="/static/admin/css/layui.css">
+</head>
+
+<link rel="stylesheet" href="/markdown/css/editormd.css" rel="external nofollow" />
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/markdown/editormd.js"></script>
+
+<body onbeforeunload="goodbye()">
+<form action="" id="postArt" class="layui-form" enctype="multipart/form-data" method='post' style="margin:15px;">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">请输入标题</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" value="<?php echo htmlentities($data['title']); ?>" lay-verify="title" autocomplete="off" placeholder="请输入文章标题（5~100个字）" class="layui-input" style="width:500px;">
+            </div>
+        </div>
+        <div class="layui-inline" style="margin-left:300px;">
+            <button type="button" class="layui-btn layui-btn-danger" id="upload"><i class="layui-icon"></i>上传封面图</button>
+            <input type="hidden" name="pic" value="">
+        </div>
+        <div class="layui-inline">
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="picview" <?php if($data['pic']): ?>src="<?php echo htmlentities($data['pic']); ?>"<?php endif; ?> style="width: 50px;height: 40px;">
+                <img class="layui-upload-img" id="picview-pop" <?php if($data['pic']): ?>src="<?php echo htmlentities($data['pic']); ?>"<?php endif; ?> style="width: 450px;height: 350px;display: none;">
+                <p id="uploadText"></p>
+            </div>
+        </div>
+        <input type="hidden" name="tag">
+        <input type="hidden" name="cate">
+        <input type="hidden" name="type">
+        <input type="hidden" name="public">
+        <input type="hidden" name="save_draft">
+        <input type="hidden" name="artid" value="<?php echo input('artid'); ?>">
+        <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-primary" id="saveDraft">保存草稿</button>
+            <button type="button" class="layui-btn" id="alterTag" >发表文章</button>
+        </div>
+    </div>
+
+    <div id="content-editormd" class="form-group" style="margin-top:10px;">
+        <textarea style="display:none;" class="form-control" id="content-editormd-markdown-doc" name="content-editormd-markdown-doc"><?php echo htmlentities($data['content']); ?></textarea>
+    </div>
+</form>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/static/admin/layui.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        editormd("content-editormd", {
+            placeholder : '开肝...',
+            width  : "100%",
+            height : 650,
+            syncScrolling : "single",
+            //path  : "/public/markdown/lib/",
+            path  : "/markdown/lib/", //此处根据自己项目做相应调整
+            watch  : true,
+            previewTheme : "white",//预览
+            theme : 'white',//工具栏
+            saveHTMLToTextarea : true, // 保存HTML到Textarea
+            // 图片上传
+            imageUpload : true,
+            imageFormats: ["jpg","jpeg","gif","png","bmp","webp"],
+            imageUploadURL: "/admin/content/md_upload",
+            toolbarIcons : function() {
+                return editormd.toolbarModes['full']; // full, simple, mini
+            },
+        });
+    });
+</script>
+</body>
+</html>
+
+<script>
+    layui.use(['layer','form','upload'], function(){
+        var form = layui.form
+            ,$ = layui.jquery
+            ,upload = layui.upload
+            ,layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }else if(value.length > 100){
+                    return '标题至多100个字符啊';
+                }
+            }
+        });
+
+        //封面图上传
+        var uploadInst = upload.render({
+            elem: '#upload'
+            ,url: '/admin/content/upload' //改成您自己的上传接口
+            ,exts: 'jpg|jpeg|gif|png' //只允许上传压缩文件
+            ,size: 1024 //限制文件大小，单位 KB
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#picview').attr('src', result); //图片链接（base64）
+                });
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code === 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功的一些操作
+                $("input[name='pic']").val(res.data.url);
+                layer.msg('上传完毕', {icon: 1});
+            }
+        });
+
+        $("#alterTag").click(function(){
+            layer.open({
+                type: 2 //此处以iframe
+                , id: 'layerAdd' //防止重复弹出
+                , shadeClose: true
+                , shade: 0.4
+                , scrollbar: false
+                , title: '添加'
+                , area: ['700px', '400px']
+                , maxmin: true
+                , content: '/admin/content/post_tag'
+            });
+        })
+        //保存草稿
+        $("#saveDraft").click(function(){
+            $("input[name='save_draft']").val('draft');
+            var formData = new FormData($("#postArt")[0]);
+            $.ajax({
+                url:"<?php echo url(); ?>",
+                dataType:'json',
+                type:'POST',
+                data:formData,
+                processData: false,
+                contentType: false,
+                success:function(data){
+                    if(data.code === 1){
+                        layer.msg('保存成功', {icon: 6});
+                    }else{
+                        layer.msg('保存失败', {icon: 5});
+                    }
+                }
+            })
+        })
+
+        //展示封面图片
+        $('#picview').click(function(){
+            //页面层-图片
+            if($('#picview-pop').attr('scr')){
+                layer.open({
+                    type: 1,
+                    title: false,
+                    closeBtn: 0,
+                    area: ['auto'],
+                    skin: 'layui-layer-nobg', //没有背景色
+                    shadeClose: true,
+                    content: $('#picview-pop')
+                });
+            }
+
+        })
+
+    });
+
+    window.onbeforeunload=function(e){
+        var e = window.event||e;
+        e.returnValue=("确定离开当前页面吗？");
+    }
+</script>
+
+

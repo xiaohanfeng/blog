@@ -1,0 +1,74 @@
+<div class="side fr">
+    <!--博主介绍-->
+    <section class="widget_avatar">
+        <div class="widget_user"
+             style="background-image: url(__STATIC__/index/images/img/aside-author-bg.jpg);">
+            <img src="__STATIC__/index/images/vip.jpg" alt="头像" height="70" width="70">
+            <div class="name">
+                <h3>
+                    <a href="tencent://message/?uin=2669941226&Site=qq&Menu=yes" rel="nofollow" target="_blank" title="QQ联系我">wucs的博客</a>
+                </h3>
+                <p>Web后端工程师,获得美国《时代周刊》2006年度风云人物、2008年感动中国组委会特别大奖！</p>
+            </div>
+        </div>
+        <div class="webinfo">
+            <div class="item">
+                <span class="num">暂无统计</span>
+                <span>文章</span></div>
+            <div class="item">
+                <span class="num">暂无统计</span>
+                <span>评论</span></div>
+            <div class="item">
+                <span class="num">暂无统计</span>
+                <span>浏览</span></div>
+        </div>
+    </section>
+    <!--博主介绍-->
+<!--    <section class="widget wow fadeInDown" id="divPrevious">-->
+<!--        <h3 class="widget-title">最近发表</h3>-->
+<!--        <ul class="widget-box divPrevious">-->
+<!--            {volist name=":get_recent_articles(5)" id="art"}-->
+<!--             <li><a href="{:url('/index/detail/')}{$art.id}">{$art.title}</a></li>-->
+<!--            {/volist}-->
+<!--        </ul>-->
+<!--    </section>-->
+
+    {notempty name="$article"}
+    <section class="widget wow fadeInDown" id="toc">
+        <h3 class="widget-title">文章目录</h3>
+        <ul class="widget-box divPrevious" id="custom-toc-container">
+
+        </ul>
+    </section>
+    {/notempty}
+
+    <section class="widget wow fadeInDown" id="divTags">
+        <h3 class="widget-title">标签列表</h3>
+        <ul class="widget-box divTags">
+            {volist name=":get_tags()" id="tag"}
+                <li>
+                    <a href="javascript:;" target="_blank" title="{$tag.name}">{$tag.name}
+                        <span class="tag-count">({$tag.name})</span>
+                    </a>
+                </li>
+            {/volist}
+        </ul>
+    </section>
+    <section class="widget wow fadeInDown" id="divLinkage">
+        <h3 class="widget-title">友情链接</h3>
+        <ul class="widget-box divLinkage">
+            {volist name=":get_links(10)" id="link"}
+                <li><a href="{$link.href}" target="_blank" title="{{ link.title }}">{$link.title}</a></li>
+            {/volist}
+        </ul>
+    </section>
+</div>
+<style>
+    .divLinkage>li>a{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+    }
+</style>
+
