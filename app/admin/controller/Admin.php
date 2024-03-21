@@ -26,6 +26,7 @@ class Admin extends BaseController{
             Session::set('userid', cookie('userid'));
             Session::set('username', cookie('username'));
         }
+        var_dump("123");
         View::assign('current_url',request()->url());
     }
 
